@@ -1,0 +1,59 @@
+{%extends 'base.html'%} {% block start %}
+
+<form class="m-4" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Name</label>
+    <input
+      name="name"
+      type="text"
+      class="form-control"
+      id="exampleInputEmail1"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="description">Description</label>
+    <input
+      name="description"
+      type="text"
+      class="form-control"
+      id="exampleInputPassword1"
+    />
+  </div>
+  <div class="mb-3">
+    <label class="form-check-label" for="exampleCheck1">Upload Photo</label>
+    <input name="img" type="file" class="form-control" id="exampleCheck1" />
+  </div>
+  <button type="submit" class="btn btn-success">Submit</button>
+</form>
+
+<table class="table table-striped">
+  <tr class="table-active">
+    <th>Id</th>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Img</th>
+    <th>Update</th>
+    <th>Delete</th>
+  </tr>
+  {% for i in receipes %}
+  <tr>
+    <td>{{i.id}}</td>
+    <td>{{i.name}}</td>
+    <td>{{i.description}}</td>
+    <td>{{i.img}}</td>
+    <td>
+      <a href="/update/{{i.id}}/"
+        ><button class="btn btn-success">Delete</button></a
+      >
+    </td>
+    <td>
+      <a href="/delete/{{i.id}}/"
+        ><button class="btn btn-warning">Delete</button></a
+      >
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% endblock %}

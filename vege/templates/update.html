@@ -1,0 +1,39 @@
+{%extends 'base.html'%} {% block start %}
+
+<form class="m-4" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Name</label>
+    <input
+      name="name"
+      type="text"
+      value="{{receipes.name}}"
+      class="form-control"
+      id="exampleInputEmail1"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="description">Description</label>
+    <input
+      name="description"
+      value="{{receipes.description}}"
+      type="text"
+      class="form-control"
+      id="exampleInputPassword1"
+    />
+  </div>
+  <div class="mb-3">
+    <label class="form-check-label" for="exampleCheck1">Upload Photo</label>
+    <input
+      value="{{receipes.img}}"
+      name="img"
+      type="file"
+      class="form-control"
+      id="exampleCheck1"
+    />
+  </div>
+
+  <button type="submit" class="btn btn-success">Update Data</button>
+</form>
+
+{% endblock %}
