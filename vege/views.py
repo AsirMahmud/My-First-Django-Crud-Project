@@ -17,13 +17,17 @@ def receipes(request):
             description=description,
             img=img
             ) 
-            
+       
            
             return redirect('/receipes/')
+    reci=Receipe.objects.all()
+    if request.GET.get('search'):
+          print(request.GET.get('search'))
+          reci=reci.filter(name__icontains=request.GET.get('search'))
     
     
 
-    reci=Receipe.objects.all()
+    
                               
     
     return render(request,'rs.html',context={'receipes':reci})
