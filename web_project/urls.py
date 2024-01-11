@@ -25,6 +25,7 @@ urlpatterns = [
 
     path('',home,name='Home'),
     path('login/',login_page,name='Login'),
+    path('logout/',logout_page,name='Logout'),
     path('register/',register,name='Register'),
     path ('about/',about,name='About'),
     path ('contact/',contact,name='Contact'),

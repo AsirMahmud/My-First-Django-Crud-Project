@@ -1,5 +1,5 @@
 {%extends 'base.html'%} {% block start %}
-
+<a href="/logout/"><button class="btn btn-success">Logout</button></a>
 <form class="m-4" method="post" enctype="multipart/form-data">
   {% csrf_token %}
   <div class="mb-3">

@@ -3,10 +3,12 @@ from .models import Receipe
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
+@login_required(login_url='/login/')
 def receipes(request):
 
     if request.method=="POST":
@@ -63,32 +65,32 @@ def update(request,id):
       context={"receipes":queryset}
       return render(request,'update.html',context)
 
-
 def login_page(request):
-      if request.method=="POST":
-            data=request.POST
-            username=data.get('username')
-            password=data.get('password')
-            
-            if  User.objects.filter(username=username).exists()==False:
-                    messages.error(request,"Invalid Username And Password")
-                    return redirect('/login/')
-            user=authenticate(username=username,password=password)
+    if request.method == "POST":
+        data = request.POST
+        username = data.get('username')
+        password = data.get('password')
 
-            if user is None:
-                  messages.error(request,'Invalid Password')
-                  return redirect('/login/') 
-            else:
-                  login()
-                  return redirect('/receipes/')
-            
-            
+        if not User.objects.filter(username=username).exists():
+            messages.error(request, "Invalid Username and Password")
+            return redirect('/login/')
 
-      
+        user = authenticate(request, username=username, password=password)
+
+        if user is None:
+            messages.error(request, 'Invalid Password')
+            return redirect('/login/')
+        else:
+            login(request, user)  # Pass the request and user to the login function
+            return redirect('/receipes/')
+
+    return render(request, 'login.html')
+    
+def logout_page(request):
+     logout(request)
+     return redirect('/login/')
      
-
-
-      return render(request,'login.html')
+     
 def register(request):
       if request.method=='POST':
            data=request.POST

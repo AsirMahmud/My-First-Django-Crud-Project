@@ -1,7 +1,10 @@
 {% extends 'base.html' %} {%block start %}
 
 <form method="post" enctype="multipart/form-data">
-  {% csrf_token %}
+  {% for message in messages %} {% if message.success %} class="{{ message.tags
+  }}"{% endif %}
+  <div class="alert alert-success" role="alert">{{ message }}</div>
+  {% endfor %} {% csrf_token %}
   <h3>Login</h3>
 
   <div class="mb-3">
