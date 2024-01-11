@@ -1,0 +1,52 @@
+{% extends 'base.html' %} {%block start %}
+<h1>Register</h1>
+
+{% for message in messages %} {% if message.success %} class="{{ message.tags
+}}"{% endif %}
+<div class="alert alert-success" role="alert">{{ message }}</div>
+{% endfor %}
+<form enctype="multipart/form-data" method="post">
+  {% csrf_token %}
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">First Name</label>
+    <input
+      type="text"
+      class="form-control"
+      name="first_name"
+      id="exampleInputEmail1"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Last Name</label>
+    <input
+      type="text"
+      class="form-control"
+      name="last_name"
+      id="exampleInputEmail1"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">User Name</label>
+    <input
+      type="text"
+      class="form-control"
+      name="username"
+      id="exampleInputEmail1"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Password</label>
+    <input
+      type="password"
+      name="password"
+      class="form-control"
+      id="exampleInputPassword1"
+    />
+    <p>Already have account?</p>
+    <a style="color: red; cursor: pointer" href="/login/">Login</a>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+{%endblock %}

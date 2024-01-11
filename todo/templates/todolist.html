@@ -1,0 +1,38 @@
+{%extends 'base.html' %} {% block start%}
+<h1>Todo List</h1>
+<form enctype="multipart/form-data" method="post">
+  {% csrf_token %}
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Task</label>
+    <input
+      name="listItems"
+      type="text"
+      class="form-control"
+      id="exampleInputEmail1"
+      aria-describedby="emailHelp"
+    />
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+</form>
+
+<h1>My Todos</h1>
+<div class="p-4 bg-success border rounded w-50 bg-body-secondary">
+  {% for i in todoData %}
+  <div class="d-flex justify-content-between border rounded m-2 p-2 bg-white">
+    <div>
+      <h4>{{i.listItems}}</h4>
+    </div>
+    <div>
+      <a href="tupdate/{{i.id}}/"> <button class="btn btn-success">Update</button></a>
+      <a href="tdelete/{{i.id}}/"><button class="btn btn-danger">Failure</button></a>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<div class="m-4">
+  <h2>Total Tasks</h2>
+  <div class="badge text-bg-secondary"><h1>{{todoData|length}}</h1></div>
+</div>
+
+</div>
+{% endblock%}

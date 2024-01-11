@@ -18,13 +18,21 @@ from django.contrib import admin
 from django.urls import path
 from newton.views import home,about,contact
 from vege.views import *
+from todo.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
     path('',home,name='Home'),
+    path('login/',login_page,name='Login'),
+    path('register/',register,name='Register'),
     path ('about/',about,name='About'),
     path ('contact/',contact,name='Contact'),
     path('receipes/',receipes,name='Receipes'),
     path('delete/<id>/',delete,name='Delete'),
-    path('update/<id>/',update,name="Update")
+    path('update/<id>/',update,name="Update"),
+    path('todo/',todos,name="Todo"),
+    path('todo/tdelete/<id>/',todoDelete,name="TodoDelete"),
+    path('todo/tupdate/<id>/',todoUpdate,name="ToUpdate"),
+  
 ]
